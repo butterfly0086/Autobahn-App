@@ -1,0 +1,57 @@
+<mat-grid-list cols="12" rowHeight="100%" class="highways">
+    <mat-grid-tile colspan="2" class="highways-list-container">
+        <mat-selection-list #roadwork (selectionChange)="onSelectionChange($event)" mat-grid-tile-content class="highways-list" [multiple]="false">
+            <mat-list-option *ngFor="let highway of highways; last as last" [value]="highway">
+                {{ highway }}
+        
+                <mat-divider [inset]="true" *ngIf="!last" class="highways-list-devider"></mat-divider>
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="10" class="roadworks-list-container">
+        <div class="roadworks-table">
+            <h1>
+                Roadwork selected: {{roadwork.selectedOptions.hasValue() ? roadwork.selectedOptions.selected[0].value : 'None'}}
+            </h1>
+
+            <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
+
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef style="width: 10%">No</th>
+                    <td mat-cell *matCellDef="let roadwork">{{ roadwork.id }}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="title" style="width: 70%">
+                    <th mat-header-cell *matHeaderCellDef>Title</th>
+                    <td mat-cell *matCellDef="let roadwork">{{ roadwork.title }}</td>
+                </ng-container>
+    
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef style="width: 20%"></th>
+                    <td mat-cell *matCellDef="let roadwork">
+                        <button mat-icon-button color="primary" [routerLink]="['/map', roadwork.identifier]">
+                            <mat-icon>map</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr class="empty-column" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">
+                        <p class="empty-text">No Result</p>
+                    </td>
+                </tr>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
+            <mat-paginator 
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements"
+            />
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
