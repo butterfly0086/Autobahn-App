@@ -19,11 +19,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighwaysListComponent } from './components/highways-list/highways-list.component';
+import { MapViewComponent } from './components/map-view/map-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HighwaysListComponent,
+    MapViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,4 +48,5 @@ import { HighwaysListComponent } from './components/highways-list/highways-list.
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
