@@ -21,6 +21,16 @@ export class HighwaysListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
+  ngOnInit(): void {
+    this.autobahnService.getHighways().subscribe((data) => {
+      this.highways = data.roads;
+    });
+  }
+
+  ngAfterViewInit() {
+    if (this.paginator) this.dataSource.paginator = this.paginator;
+  }
+
   onSelectionChange(event: MatSelectionListChange) {
     const selectedOptions = event.source.selectedOptions.selected.map(
       option => option.value
@@ -44,13 +54,5 @@ export class HighwaysListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void {
-    this.autobahnService.getHighways().subscribe((data) => {
-      this.highways = data.roads;
-    });
-  }
-
-  ngAfterViewInit() {
-    if (this.paginator) this.dataSource.paginator = this.paginator;
-  }
+  
 }

@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HighwaysListComponent } from './components/highways-list/highways-list.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
+import { AutobahnService } from './services/autobahn.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [AutobahnService],
   bootstrap: [AppComponent]
 })
 
