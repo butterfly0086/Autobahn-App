@@ -1,6 +1,15 @@
 <mat-grid-list cols="12" rowHeight="100%" class="highways">
-    <mat-grid-tile colspan="2" class="highways-list-container">
-        <mat-selection-list #roadwork (selectionChange)="onSelectionChange($event)" mat-grid-tile-content class="highways-list" [multiple]="false">
+    <mat-grid-tile [colspan]="highwaysGrid" class="highways-list-container">
+        <mat-selection-list #roadwork (selectionChange)="onSelectionChange($event)" mat-grid-tile-content class="highways-list" [multiple]="false" [(ngModel)]="selectedHighway">
+            <mat-form-field class="search-highway">
+                <mat-label>Search for Highway</mat-label>
+                <input matInput placeholder="Ex: A1" [(ngModel)]="searchValue" (keydown.enter)="onSearchHighways()">
+            </mat-form-field>
+
+            <h4 *ngIf="highways.length === 0 && !getHighwaysLoading" class="empty-text">No Result</h4>
+
+            <mat-progress-bar mode="query" *ngIf="getHighwaysLoading"></mat-progress-bar>
+
             <mat-list-option *ngFor="let highway of highways; last as last" [value]="highway">
                 {{ highway }}
         
@@ -8,11 +17,23 @@
             </mat-list-option>
         </mat-selection-list>
     </mat-grid-tile>
-    <mat-grid-tile colspan="10" class="roadworks-list-container">
+
+    <mat-grid-tile [colspan]="roadworksGrid" class="roadworks-list-container">
         <div class="roadworks-table">
-            <h1>
-                Roadwork selected: {{roadwork.selectedOptions.hasValue() ? roadwork.selectedOptions.selected[0].value : 'None'}}
-            </h1>
+            <div class="roadworks-header">
+                <h1>
+                    Roadwork selected: {{roadwork.selectedOptions.hasValue() ? roadwork.selectedOptions.selected[0].value : 'None'}}
+                </h1>
+
+                <button 
+                    *ngIf="highwaysGrid === 0 || roadworksGrid === 0"
+                    (click)="onHandleMenu()"
+                    mat-icon-button 
+                    color="primary" 
+                >
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
 
             <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
 

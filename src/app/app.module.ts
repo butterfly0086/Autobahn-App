@@ -15,6 +15,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +48,9 @@ import { AutobahnService } from './services/autobahn.service';
     MatChipsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
   ],
   providers: [AutobahnService],
   bootstrap: [AppComponent]

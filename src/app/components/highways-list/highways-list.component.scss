@@ -9,6 +9,17 @@
         padding: 25px;
         width: 100%;
 
+        .roadworks-header {
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            h1 {
+                margin: 0;
+            }
+        }
+
         .empty-column {
             margin: 20px 0;
             text-align: center;
@@ -25,6 +36,18 @@
     .highways-list-container {
         .mat-grid-tile-content {
             align-items: flex-start!important;
+        }
+
+        .search-highway {
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .empty-text {
+            text-align: center;
+            color: red;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         .highways-list {
